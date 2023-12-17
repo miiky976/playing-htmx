@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+<style>
+.htmx-indicator{
+	display:none;
+}
+.htmx-request .htmx-indicator{
+	display:inline;
+}
+.htmx-request.htmx-indicator{
+	display:inline;
+}
+.red {
+	color: red;
+	transition: all ease-in 1s;
+}
+.blue {
+	color: blue;
+	transition: all ease-in 1s;
+}
+</style>
+</head>
+<body  hx-get="/init" hx-swap="innerHTML" hx-target="#swapper" hx-trigger="load">
+	<div hx-target="#swapper" hx-indicator="#indicator" hx-trigger="click throttle:1s">
+	<button hx-get="/sub">
+		Restar -
+	</button>
+	<button hx-get="/sum">
+		Sumar +
+	</button>
+	</div>
+	<h1 style="font-family: 'Arial Narrow', Arial, sans-serif;" id="swapper">0</h1>
+	<img id="indicator" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831" class="htmx-indicator" width="50" height="50">
+	<input type="text" id="input" name="query"
+	hx-get="/search" hx-trigger="keyup changed delay:500ms"
+	hx-target="#master" 
+	>
+	<div id="master">
+	</div>
+	<input type="number" name="which"
+	hx-get="/images" hx-trigger="keyup changed delay:0ms"
+	hx-target="#image"
+	>
+	<div id="image">
+	</div>
+</body>
